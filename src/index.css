@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+@media print {
+  header { display: none; }
+  main { padding: 0 !important; }
+  button { display: none !important; }
+  input[type="month"] { display: none !important; }
+}

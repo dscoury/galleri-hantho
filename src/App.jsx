@@ -34,7 +34,7 @@ export default function App() {
           ))}
         </nav>
       </header>
-      <main className="max-w-6xl mx-auto px-6 py-8">
+      <main className="max-w-screen-2xl mx-auto px-8 py-8">
         {page === 'inventory' && <Inventory />}
         {page === 'add' && <AddArtwork onSaved={() => setPage('inventory')} />}
         {page === 'sale' && <RegisterSale onSaved={() => setPage('inventory')} />}

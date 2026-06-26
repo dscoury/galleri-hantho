@@ -44,13 +44,13 @@ export default function RegisterSale({ onSaved }) {
       fakturanr: fakturanr || null,
     })
     if (salgError) { setSaving(false); return alert('Feil: ' + salgError.message) }
-    await supabase.from('kunstverk').update({ status: 'Solgt' }).eq('id', selected.id)
+    await supabase.from('kunstverk').update({ status: 'Solgt', solgt_dato: salgsdato }).eq('id', selected.id)
     setSaving(false)
     onSaved()
   }
 
   return (
-    <div className="max-w-lg">
+    <div className="w-full">
       <h2 className="text-2xl font-semibold mb-6">Registrer salg</h2>
 
       <div className="bg-white rounded-xl border border-stone-200 p-6 space-y-5">

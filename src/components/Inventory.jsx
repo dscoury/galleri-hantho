@@ -89,7 +89,7 @@ export default function Inventory() {
           <table className="w-full text-sm">
             <thead className="bg-stone-50 border-b border-stone-200">
               <tr>
-                {['Tittel', 'Eksemplar', 'Kunstner', 'Type', 'Pris', 'Status', 'Mottatt', ''].map(h => (
+                {['Tittel', 'Eksemplar', 'Kunstner', 'Type', 'Pris', 'Status', 'Mottatt', 'Solgt', 'Returnert', ''].map(h => (
                   <th key={h} className="text-left px-4 py-3 text-stone-500 font-medium">{h}</th>
                 ))}
               </tr>
@@ -107,9 +107,9 @@ export default function Inventory() {
                       {v.status}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-stone-400">
-                    {formatDate(v.mottatt_dato)}
-                  </td>
+                  <td className="px-4 py-3 text-stone-400">{formatDate(v.mottatt_dato)}</td>
+                  <td className="px-4 py-3 text-stone-400">{v.status === 'Solgt' ? formatDate(v.solgt_dato) : '—'}</td>
+                  <td className="px-4 py-3 text-stone-400">{v.status === 'Returnert' ? formatDate(v.retur_dato) : '—'}</td>
                   <td className="px-4 py-3">
                     {v.status === 'Tilgjengelig' && (
                       <button
