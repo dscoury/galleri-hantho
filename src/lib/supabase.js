@@ -7,6 +7,8 @@ export const supabase = createClient(supabaseUrl, supabaseKey)
 
 export function formatDate(dateStr) {
   if (!dateStr) return '—'
-  const [year, month, day] = dateStr.split('-')
-  return `${day}/${month}/${year}`
+  const months = ['januar','februar','mars','april','mai','juni',
+                  'juli','august','september','oktober','november','desember']
+  const [year, month] = dateStr.split('-')
+  return `${months[parseInt(month) - 1]} ${year}`
 }

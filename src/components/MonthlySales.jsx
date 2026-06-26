@@ -31,7 +31,7 @@ export default function MonthlySales() {
   async function toggleUtbetalt(id, current) {
     await supabase
       .from('salg')
-      .update({ utbetalt: !current, utbetalt_dato: !current ? new Date().toISOString().split('T')[0] : null })
+      .update({ utbetalt: !current, utbetalt_dato: !current ? new Date().toISOString().slice(0, 7) : null })
       .eq('id', id)
     fetchSalg()
   }

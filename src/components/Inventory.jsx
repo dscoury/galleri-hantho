@@ -29,7 +29,7 @@ export default function Inventory() {
   }
 
   async function handleReturn(id) {
-    const dato = prompt('Returdato (ÅÅÅÅ-MM-DD):')
+    const dato = prompt('Returmåned (ÅÅÅÅ-MM):')
     if (!dato) return
     await supabase
       .from('kunstverk')

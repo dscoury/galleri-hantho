@@ -11,7 +11,7 @@ export default function RegisterSale({ onSaved }) {
   const [search, setSearch] = useState('')
 
   function today() {
-    return new Date().toISOString().split('T')[0]
+    return new Date().toISOString().slice(0, 7) // YYYY-MM
   }
 
   useEffect(() => {
@@ -122,9 +122,9 @@ export default function RegisterSale({ onSaved }) {
         )}
 
         <div>
-          <label className="block text-sm text-stone-500 mb-1">Salgsdato</label>
+          <label className="block text-sm text-stone-500 mb-1">Salgsmåned</label>
           <input
-            type="date"
+            type="month"
             value={salgsdato}
             onChange={e => setSalgsdato(e.target.value)}
             className="border border-stone-200 rounded-lg px-3 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-stone-400"

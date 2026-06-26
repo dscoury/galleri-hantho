@@ -13,7 +13,7 @@ export default function AddArtwork({ onSaved }) {
   const [mottatt_dato, setMottatt_dato] = useState(today())
 
   function today() {
-    return new Date().toISOString().split('T')[0]
+    return new Date().toISOString().slice(0, 7) // YYYY-MM
   }
 
   function emptyRow() {
@@ -106,14 +106,14 @@ export default function AddArtwork({ onSaved }) {
             )}
           </div>
           <div>
-            <label className="block text-sm text-stone-500 mb-1">Mottatt dato</label>
-            <input
-              type="date"
-              value={mottatt_dato}
-              onChange={e => setMottatt_dato(e.target.value)}
-              className="border border-stone-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-stone-400"
-            />
-          </div>
+          <label className="block text-sm text-stone-500 mb-1">Mottatt</label>
+          <input
+            type="month"
+            value={mottatt_dato}
+            onChange={e => setMottatt_dato(e.target.value)}
+            className="border border-stone-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-stone-400"
+          />
+        </div>
         </div>
       </div>
 
