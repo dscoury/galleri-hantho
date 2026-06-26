@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { supabase } from '../lib/supabase'
 import { supabase, formatDate } from '../lib/supabase'
 
 const STATUS_COLORS = {
