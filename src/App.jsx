@@ -4,6 +4,7 @@ import Inventory from './components/Inventory'
 import AddArtwork from './components/AddArtwork'
 import RegisterSale from './components/RegisterSale'
 import MonthlySales from './components/MonthlySales'
+import ArtistReport from './components/ArtistReport'
 
 export default function App() {
   const [page, setPage] = useState('inventory')
@@ -42,6 +43,7 @@ export default function App() {
     { id: 'add', label: 'Ny innlevering' },
     { id: 'sale', label: 'Registrer salg' },
     { id: 'monthly', label: 'Månedsrapport' },
+    { id: 'artist', label: 'Kunstnerrapport' },
   ]
 
   if (loading) return null
@@ -118,6 +120,7 @@ export default function App() {
         {page === 'add' && <AddArtwork onSaved={() => setPage('inventory')} />}
         {page === 'sale' && <RegisterSale onSaved={() => setPage('inventory')} />}
         {page === 'monthly' && <MonthlySales />}
+        {page === 'artist' && <ArtistReport />}
       </main>
     </div>
   )
