@@ -38,7 +38,7 @@ export default function Inventory() {
     fetchVerk()
   }
 
-  const statuses = ['Alle', 'Tilgjengelig', 'Reservert', 'Solgt', 'Returnert']
+  const statuses = ['Alle', 'Tilgjengelig', 'Solgt', 'Returnert']
 
   const filtered = verk.filter(v => {
     const matchStatus = filter === 'Alle' || v.status === filter
