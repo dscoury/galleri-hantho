@@ -21,8 +21,15 @@ export default function AddArtwork({ onSaved }) {
   }
 
   useEffect(() => {
-    supabase.from('kunstnere').select('id, navn').order('navn')
-      .then(({ data }) => setKunstnere(data || []))
+    supabase.from('kunstnere').select('id, navn')
+      .then(({ data }) => {
+        const sorted = (data || []).sort((a, b) => {
+          const lastA = a.navn.trim().split(' ').pop().toLowerCase()
+          const lastB = b.navn.trim().split(' ').pop().toLowerCase()
+          return lastA.localeCompare(lastB, 'nb')
+        })
+        setKunstnere(sorted)
+      })
   }, [])
 
   function updateRow(i, field, value) {
