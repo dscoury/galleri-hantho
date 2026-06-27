@@ -16,14 +16,10 @@ export default function MonthlySales() {
 
   async function fetchSalg() {
     setLoading(true)
-    const from = `${month}-01`
-    const [year, monthIndex] = month.split('-').map(Number)
-    const to = new Date(year, monthIndex, 0).toISOString().split('T')[0]
     const { data } = await supabase
       .from('salg')
       .select('*, kunstverk(tittel, eksemplar, kunstnere(navn, epost, kontonr))')
-      .gte('salgsdato', from)
-      .lte('salgsdato', to)
+      .like('salgsdato', `${month}%`)
       .order('salgsdato')
     setSalg(data || [])
     setLoading(false)
@@ -112,15 +108,30 @@ export default function MonthlySales() {
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-semibold">Månedsrapport</h2>
         <div className="flex gap-3 items-center">
-          <input
-            type="month"
-            value={month}
-            onChange={e => setMonth(e.target.value)}
-            className="border border-stone-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-stone-400"
-          />
+          <button
+            onClick={() => {
+              const [y, m] = month.split('-').map(Number)
+              const d = new Date(y, m - 2)
+              setMonth(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`)
+            }}
+            className="px-3 py-2 border border-stone-200 rounded-lg text-sm hover:bg-stone-100"
+          >
+            ←
+          </button>
+          <span className="text-sm font-medium w-32 text-center">{formatDate(month + '-01').replace(/^\d+\//, '').replace('/', ' ')}</span>
+          <button
+            onClick={() => {
+              const [y, m] = month.split('-').map(Number)
+              const d = new Date(y, m)
+              setMonth(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`)
+            }}
+            className="px-3 py-2 border border-stone-200 rounded-lg text-sm hover:bg-stone-100"
+          >
+            →
+          </button>
           <button
             onClick={() => window.print()}
-            className="px-4 py-2 bg-stone-800 text-white rounded-lg text-sm font-medium hover:bg-stone-700"
+            className="ml-2 px-4 py-2 bg-stone-800 text-white rounded-lg text-sm font-medium hover:bg-stone-700"
           >
             Skriv ut
           </button>
