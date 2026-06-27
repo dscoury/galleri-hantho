@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabase, formatDate } from '../lib/supabase'
 
 const TYPES = ['Grafikk', 'Original på papir', 'Maleri', 'Keramikk', 'Glasskunst']
 
@@ -113,14 +113,35 @@ export default function AddArtwork({ onSaved }) {
             )}
           </div>
           <div>
-          <label className="block text-sm text-stone-500 mb-1">Mottatt</label>
-          <input
-            type="month"
-            value={mottatt_dato}
-            onChange={e => setMottatt_dato(e.target.value)}
-            className="border border-stone-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-stone-400"
-          />
-        </div>
+            <label className="block text-sm text-stone-500 mb-1">Mottatt</label>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  const [y, m] = mottatt_dato.split('-').map(Number)
+                  const d = new Date(y, m - 2)
+                  setMottatt_dato(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`)
+                }}
+                className="px-3 py-2 border border-stone-200 rounded-lg text-sm hover:bg-stone-100"
+              >
+                ←
+              </button>
+              <span className="text-sm font-medium w-32 text-center">
+                {formatDate(mottatt_dato + '-01').replace(/^\d+\//, '').replace('/', ' ')}
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  const [y, m] = mottatt_dato.split('-').map(Number)
+                  const d = new Date(y, m)
+                  setMottatt_dato(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`)
+                }}
+                className="px-3 py-2 border border-stone-200 rounded-lg text-sm hover:bg-stone-100"
+              >
+                →
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
